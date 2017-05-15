@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/ico.ico">
+    <title>四平电视台-管理</title>
+    <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+    
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/static/jqueryui/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" media="screen" />
+    <link href="/static/jqueryui/css/swanky-purse/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="/static/highcharts/js/highcharts.js"></script>
+    <script type="text/javascript" src="/static/highcharts/js/highcharts-3d.js"></script>
+    <!-- 
+    <script type="text/javascript" src="/static/highcharts/js/themes/skies.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.css" media="screen" />
+    -->
+</head>
+<body>
+  <div class="collapse navbar-collapse  navbar-inverse" id="bs-example-navbar-collapse-9">
+    <ul class="nav navbar-nav">
+    {% if session['userinfo']['roles'][0] == 'admin' %}
+      <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">新闻管理<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li id="news_list"><a href="/admin/news_list/">新闻列表</a></li>
+            <li role="separator" class="divider"></li>
+            <li id="addspnews"><a href="/admin/addspnews/">增加新闻</a></li>
+            <li role="separator" class="divider"></li>
+            <li id="addspgroup"><a href="/admin/addspgroup/">新闻分组管理</a></li>
+          </ul>
+      </li>
+      <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">素材管理<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li id="addbanner"><a href="/admin/addbanner/">增加banner</a></li>
+            <li role="separator" class="divider"></li>
+            <li id="addfengmian"><a href="/admin/addfengmian/">增加新闻封面</a></li>
+            <li role="separator" class="divider"></li>
+            <li id="addshipin"><a href="/admin/addshipin/">增加新闻视频</a></li>
+            <li role="separator" class="divider"></li>
+            <li id="addlogo"><a href="/admin/addlogo/">LOGO管理</a></li>
+          </ul>
+      </li>
+      <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动管理<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li id="huodonglist"><a href="/admin/huodonglist/">活动列表</a></li>
+            <li role="separator" class="divider"></li>
+            <li id="addhuodong"><a href="/admin/addhuodong/">增加活动</a></li>
+          </ul>
+      </li>
+      <li id="addzhuchiren"><a href="/admin/addzhuchiren/">主持人管理</a></li>
+      <li id="addgonggao"><a href="/admin/addgonggao/">公告管理</a></li>
+      {% endif%}
+
+    </ul>
+     <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">用户管理 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a>{{session['userinfo']['account']}}</a></li>
+            <li><a href="/logout">退出登录</a></li>
+          </ul>
+        </li>
+      </ul>
+  </div>
+  {% block content %}{% endblock %}
+
+</body>
+<script type="text/javascript" src="/static/js/beehoo.js"></script>
+</html>

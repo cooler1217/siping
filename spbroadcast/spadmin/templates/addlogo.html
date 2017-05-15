@@ -1,0 +1,156 @@
+{% extends "spindex.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+<h2 align="center">LOGO管理</h2>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  新增Logo
+</button>
+<hr/>
+<div class="bs-example" data-example-id="hoverable-table">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>名称</th>
+          <th>地址</th>
+          <th>状态</th>
+          <th>时间</th>
+          <th>描述</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for data in datas %}
+        <tr>
+          <th scope="row">{{data.id}}</th>
+          <th scope="row">{{data.name}}</th>
+          <td><a href="/static/media/logo/{{data.path}}" target="blank">{{data.path}}</a></td>
+          <td>{{data.status}}</td>
+          <td>{{data.createtime}}</td>
+          <td>{{data.desc}}</td>
+          <td>
+            {% if data.status ==1 %}
+            <input id="{{data.id}}" type="button" class="btn btn-warning xiaxian" value="下线"/>
+            {%else%}
+            <input id="{{data.id}}" type="button" class="btn btn-success shangxian" value="上线"/>
+            {%endif%}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+<div >
+     总页数：{{total}}
+     <ul class="pagination">
+       {% for i in range(total) %}
+            {%if i == num %}
+       <li>
+         <a style="color:red" href="/admin/addlogo/{{i}}">{{i+1}}</a>
+       </li>
+       {% elif i> (num-10) and i< (num+10)%}
+              <li>
+         <a href="/admin/addlogo/{{i}}">{{i+1}}</a>
+       </li>
+       {% endif %}
+          {% endfor %}
+     </ul>
+   </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">增加LOGO(290X60)</h4>
+      </div>
+      <div class="modal-body">
+       <form id="formfengmian" class="form-horizontal" action="/admin/uploadfile/" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+          <label for="title" class="col-sm-2 control-label">名称</label>
+          <div class="col-sm-10">
+            <input type="input" class="form-control" id="title" name="title" ></div>
+        </div>
+        <div class="form-group">
+          <label for="desc" class="col-sm-2 control-label">描述</label>
+          <div class="col-sm-10">
+            <input type="input" class="form-control" id="desc" name="desc" ></div>
+        </div>
+        <div class="form-group">
+          <label for="desc" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <input id="file" name="file" class="btn" type="file" />
+            <input name="ftype" value="5"  type="hidden" />
+            <!-- <input type="submit" class="btn btn-success" name="Submit" value="增加封面图片" /> -->
+          </div>
+        </div>
+      </form> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="addfengmian_btn">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $("#addfengmian_btn").click(function(){
+        $("#formfengmian").submit();
+    });
+
+     $(".xiaxian").click(function(){
+        var truthBeTold = window.confirm("确定下线这个LOGO？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid,"status":"2"},
+              url:"/admin/changelogo/",
+              success: function(data){
+                if (data['result']=="1") {
+                  alert("下线成功");
+                  location.href = location.href;
+                }else{
+                  alert("下线失败");
+                }
+              }
+          });
+        } 
+      })
+
+      $(".shangxian").click(function(){
+        var truthBeTold = window.confirm("确定上线这个LOGO？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid,"status":"1"},
+              url:"/admin/changelogo/",
+              success: function(data){
+                if (data['result']=="1") {
+                  alert("上线成功");
+                  location.href = location.href;
+                }else{
+                  alert("上线失败,请先下线LOGO");
+                }
+              }
+          });
+        } 
+      })
+
+
+  });
+</script>
+{% endblock %}

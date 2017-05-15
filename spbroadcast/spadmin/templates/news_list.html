@@ -1,0 +1,197 @@
+{% extends "spindex.html" %}
+
+{% block content %}
+
+<div>
+  <form class="form-inline" method="GET" action="/admin/news_list/">
+  <div class="form-group">
+    <label for="title">标题</label>
+    <input type="text" class="form-control" name="title" id="title" placeholder="标题" value="{{title}}">
+  </div>
+    <div class="form-group">
+    <label for="author">作者</label>
+    <input type="text" class="form-control" name="author" id="author" placeholder="作者" value="{{author}}">
+  </div>
+  <div class="form-group">
+    <label for="ntype">新闻类型</label>
+    <select id="ntype" name="ntype" class="form-control">
+    {%for sgdata in sgdatas%}
+    <option value="{{sgdata.id}}">{{sgdata.name}}</option>
+    {%endfor%}
+      <!-- <option value="1">四平新闻</option>
+      <option value="2">在你身边</option>
+      <option value="3">区县新闻</option>
+      <option value="4">视频展播</option>
+      <option value="5">精品栏目</option>
+      <option value="6">专栏宣传</option>
+      <option value="7">电台栏目</option>
+      <option value="9">其他</option> -->
+    </select>
+</div>
+<div class="form-group">
+    <label for="status">状态</label>
+    <select id="status" name="status" class="form-control">
+      <option value="0">为处理</option>
+      <option value="1">已发布</option>
+      <option value="2">以下线</option>
+    </select>
+</div>
+  <button type="submit" class="btn btn-default">搜索</button>
+</form>
+
+</div>
+<hr/>
+
+<div class="bs-example" data-example-id="hoverable-table">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>标题</th>
+          <th>摘要</th>
+          <th>作者</th>
+          <th>编辑</th>
+          <th>责编</th>
+          <th>新闻类型</th>
+          <th>状态</th>
+          <th>阅读</th>
+          <th>点赞</th>
+          <th>更新时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for data in datas %}
+        <tr>
+          <th scope="row">{{data.id}}</th>
+          <td>{{data.title}}</td>
+          <td>{{data.shot_content[:10]}}...</td>
+          <td>{{data.author}}</td>
+          <td>{{data.reporter}}</td>
+          <td>{{data.zebian}}</td>
+          <td>
+             {% if data.ntype==1 %}
+            四平新闻
+            {%elif data.ntype==2%}
+            在你身边
+            {%elif data.ntype==3%}
+            县区新闻
+            {%elif data.ntype==4%}
+            精品栏目
+            {%elif data.ntype==5%}
+            专栏宣传
+            {% else %}
+            其他
+            {%endif%}
+          </td>
+          <td>
+          {% if data.status==0 %}
+            未发布
+          {%elif data.status==1%}
+          已发布
+          {% else %}
+          已下线
+          {%endif%}
+         
+          </td>
+          <td>{{data.read_num}}</td>
+          <td>{{data.zan_num}}</td>
+          <td>{{data.lastmodify}}</td>
+          <td>
+          <input id="{{data.id}}" type="button" class="btn btn-danger delete" value="删除"/>
+          &nbsp;&nbsp;
+          <input id="{{data.id}}" type="button" class="btn btn-success fabu" value="发布"/>
+          &nbsp;&nbsp;
+          <input id="{{data.id}}" type="button" class="btn btn-warning xiaxian" value="下线"/>
+          <a class="btn btn-success" target="_blank" href="http://58.244.238.133:9000/xinwenbofangitem/?nid={{data.id}}">show</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+   
+   <div >
+     总页数：{{total}}
+     <ul class="pagination">
+       {% for i in range(total) %}
+            {%if i == num %}
+       <li>
+         <a style="color:red" href="/admin/news_list/{{i}}?title={{title}}&author={{author}}&ntype={{ntype}}&status={{status}}">{{i+1}}</a>
+       </li>
+       {% elif i> (num-10) and i < (num+10)%}
+              <li>
+         <a href="/admin/news_list/{{i}}?title={{title}}&author={{author}}&ntype={{ntype}}&status={{status}}">{{i+1}}</a>
+       </li>
+       {% endif %}
+          {% endfor %}
+     </ul>
+   </div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+      $(".delete").click(function(){
+        var truthBeTold = window.confirm("确定删除这个新闻？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid},
+              url:"/admin/deletenews/",
+              success: function(data){
+                if (data['result']) {
+                  alert("删除成功");
+                  location.href = location.href;
+                }else{
+                  alert("删除失败");
+                }
+              }
+          });
+        } 
+      })
+
+       $(".fabu").click(function(){
+        var truthBeTold = window.confirm("确定发布这个新闻？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid},
+              url:"/admin/fabunews/",
+              success: function(data){
+                if (data['result']) {
+                  alert("发布成功");
+                  location.href = location.href;
+                }else{
+                  alert("发布失败");
+                }
+              }
+          });
+        } 
+      })
+
+$(".xiaxian").click(function(){
+        var truthBeTold = window.confirm("确定下线这个新闻？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid},
+              url:"/admin/xiaxiannews/",
+              success: function(data){
+                if (data['result']) {
+                  alert("下线成功");
+                  location.href = location.href;
+                }else{
+                  alert("下线失败");
+                }
+              }
+          });
+        } 
+      })
+
+  });
+</script>
+{% endblock %}

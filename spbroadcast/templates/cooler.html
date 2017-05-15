@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script> -->
+  <script src="/static/js/videojs-ie8.min.js"></script>
+  <!-- If you'd like to support IE8 -->
+  <link href="/static/css/video-js.min.css" rel="stylesheet">
+  <script src="/static/js/video.js"></script>
+</head>
+
+<body>
+
+<!-- <script src="/static/js/flowplayer.js"></script>
+<script src="/static/js/jwplayer.js"></script>
+
+
+<div id="myElement">Loading the player...</div>
+
+<script type="text/javascript">
+    jwplayer("myElement").setup({
+        file: "/static/media/cooler.mp4",
+        image: "/static/images/1.jpg"
+    });
+</script> -->
+
+<hr/>
+
+<!-- <div class="flowplayer" data-swf="flowplayer.swf" data-ratio="0.4167">
+      <video>    
+         <source type="video/mp4" src="/static/media/cooler.mp4">
+      </video>
+</div>
+ -->
+<hr/>
+
+  <div>
+    <video id="my-video" class="video-js" controls preload="auto" width="360" height="290"
+              poster="/static/images/1.jpg" data-setup='{}'>
+    <source src="/static/media/cooler.flv" type='video/flv'>
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </video>
+ 
+</div>
+<hr>
+<video id="really-cool-video" class="video-js " controls
+ preload="auto" width="480" height="320" poster="/static/images/1.jpg"
+ data-setup='{}'>
+  <source src="/static/media/cooler.mp4" type="video/mp4">
+
+  <p class="vjs-no-js">
+    To view this video please enable JavaScript, and consider upgrading to a web browser
+    that
+    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+  </p>
+</video>
+<hr/>
+
+
+<video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264"
+      poster="http://video-js.zencoder.com/oceans-clip.png"
+      data-setup="{}">
+    <source src="/static/media/22.mp4" type='video/mp4' />
+   <!--  <source src="http://视频地址格式2.webm" type='video/webm' />
+    <source src="http://视频地址格式3.ogv" type='video/ogg' /> -->
+    <track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+    <track kind="subtitles" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+</video>
+
+<!--   // <script src="http://vjs.zencdn.net/5.8.0/video.js"></script>
+-->
+<script>
+
+
+
+
+
+
+
+    // var vList = ['/static/media/43.flv', '/static/media/43.flv']; // 初始化播放列表  
+
+    // var myPlayer = videojs("my-video");
+   //              var cur = 0;
+   //              myPlayer.play();
+   //              myPlayer.on('ended', function() {
+   //                  if (cur == vList.length){
+   //                      alert("all ended")
+   //                  }else{
+   //                      cur++;
+   //                      myPlayer.src=vList[cur];
+   //                      myPlayer.play();
+   //                  }
+   //                });
+      // videojs("my-video").ready(function(){
+      //        myPlayer = this;
+     //                       myPlayer.play();
+      //        // myPlayer.src('/static/media/43.flv');
+     //                       // myPlayer.width("600");
+     //                       // myPlayer.height("400");
+     //                       // myPlayer.loop(3);
+      //        // myPlayer.loop(true);
+     //                        // myPlayer.currentTime(5);
+     //                        // myPlayer.stopButton();
+
+     //    });
+
+
+                       
+                        // var vLen = vList.length; // 播放列表的长度  
+                        // var curr = 0; // 当前播放的视频  
+                          
+                        // var video = document.getElementById("my-video");  
+                          
+                        // var video = document.createElement("VIDEO"); 
+                        // video.setAttribute("width", "100%"); 
+                        // video.setAttribute("height", "500"); 
+                        // video.setAttribute("id", "example_video_1"); 
+                        // video.setAttribute("class", "video-js vjs-default-skin"); 
+                        // video.setAttribute("preload", "none"); 
+                        // video.setAttribute("poster", "video//demo.jpg"); 
+                        // video.setAttribute("data-setup", "{}"); 
+                        // video.setAttribute("controls", "yes"); 
+                        // document.getElementById("playervideo").appendChild(video);  
+                        // //document.body.appendChild(video);  
+  
+                        // video.addEventListener('ended', play);  
+                        // play();  
+                        // function play(e) {  
+                        //     video.src = vList[curr];  
+                        //     video.load();   
+                        //     video.play();  
+                        //     curr++;  
+                        //     if(curr >= vLen){  
+                        //         curr = 0; // 播放完了，重新播放  
+                        //     }  
+                          
+                        // }  
+</script>
+
+
+
+
+</body>
+</html>

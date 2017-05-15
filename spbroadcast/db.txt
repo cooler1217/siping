@@ -1,0 +1,17 @@
+$cfg_dbhost = 'localhost';
+$cfg_dbname = 'spgd';
+$cfg_dbuser = 'huicui360';
+$cfg_dbpwd = 'C66a425bb92$^*#@339EF2C';
+$cfg_dbprefix = 'zhuzhuzhu_';
+$cfg_db_language = 'utf8';
+
+
+
+
+mysqldump --opt -h123.57.55.229 -usiping -pSiPing1234 --skip-lock-tables spbroadcast>database.sql
+
+
+f726089b07977833f658a3bae92e44a4f58fd90f930d2f75418284e1621f9e84e170f9c0e6038de2052c8b70f807a59e879284a13ff800a37050861081abed664ecbbb83109caa9b131c522c05f5a2eecb4aad33b88b1eda0b6c5baeb2a571c4fa3e5ed05234ffdaed3853f771e923dde021c2ffd97b22b1926b1f0b73b8d41d290e37bd9727922f28550f06d4ffe6580f79b699446ad99c5ef1b9a822a6a1be73fb4a71c67440cf7378b6995043c457ff97865819b5a41798ae74134e2df384681102ffd8d92a6990681b90b171a6d881fdde4e0f6332a9e3502b75fc46954f
+
+
+ffmpeg  -y  -i input.wmv  -f mp4 -async 1-s 480x320  -acodec libfaac -vcodec libxvid  -qscale 7 -dts_delta_threshold 1 output.mp4

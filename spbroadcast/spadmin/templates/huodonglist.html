@@ -1,0 +1,144 @@
+{% extends "spindex.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/wangEditor.css">
+<script type="text/javascript" src='/static/js/wangEditor.js'></script>
+
+<div class="container-fluid">
+<h2 align="center">活动管理</h2>
+<!-- Button trigger modal -->
+<a class="btn btn-primary btn-lg" href="/admin/addhuodong/">
+  新增活动
+</a>
+<hr/>
+<div class="bs-example" data-example-id="hoverable-table">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>活动名称</th>
+          <th>开始时间</th>
+          <th>结束时间</th>
+          <th>状态</th>
+          <th>组织者</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for data in datas %}
+        <tr>
+          <th scope="row">{{data.id}}</th>
+          <td>{{data.name}}</td>
+          <td>{{data.starttime}}</td>
+          <td>{{data.endtime}}</td>
+          <td>
+          {% if data.sex ==1 %}
+          进行中
+          {% elif data.status==0 %}
+          未开始
+          {%else%}
+          已结束
+          {%endif%}
+          </td>
+          <td>{{data.author}}</td>
+          <td>
+            <input id="{{data.id}}" type="button" class="btn btn-danger delete" value="删除"/>
+          &nbsp;&nbsp;
+          <input id="{{data.id}}" type="button" class="btn btn-success shangxian" value="发布"/>
+          &nbsp;&nbsp;
+          <input id="{{data.id}}" type="button" class="btn btn-warning xiaxian" value="下线"/>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+<div >
+     总页数：{{total}}
+     <ul class="pagination">
+       {% for i in range(total) %}
+            {%if i == num %}
+       <li>
+         <a style="color:red" href="/admin/addhuodong/{{i}}?name={{name}}&status={{status}}">{{i+1}}</a>
+       </li>
+       {% elif i> (num-10) and i< (num+10)%}
+              <li>
+         <a href="/admin/addhuodong/{{i}}?name={{name}}&status={{status}}">{{i+1}}</a>
+       </li>
+       {% endif %}
+          {% endfor %}
+     </ul>
+   </div>
+
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".delete").click(function(){
+        var truthBeTold = window.confirm("确定删除这个活动？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid,"status":"-1"},
+              url:"/admin/changehuodong/",
+              success: function(data){
+                if (data['result']) {
+                  alert("删除成功");
+                  location.href = location.href;
+                }else{
+                  alert("删除失败");
+                }
+              }
+          });
+        } 
+      })
+
+    $(".shangxian").click(function(){
+        var truthBeTold = window.confirm("确定上线这个活动？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid,"status":"1"},
+              url:"/admin/changehuodong/",
+              success: function(data){
+                if (data['result']) {
+                  alert("上线成功");
+                  location.href = location.href;
+                }else{
+                  alert("上线失败");
+                }
+              }
+          });
+        } 
+      })
+
+        $(".xiaxian").click(function(){
+        var truthBeTold = window.confirm("确定下线这个活动？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid,"status":"2"},
+              url:"/admin/changehuodong/",
+              success: function(data){
+                if (data['result']) {
+                  alert("下线成功");
+                  location.href = location.href;
+                }else{
+                  alert("下线失败");
+                }
+              }
+          });
+        } 
+      })
+
+
+  });
+</script>
+{% endblock %}

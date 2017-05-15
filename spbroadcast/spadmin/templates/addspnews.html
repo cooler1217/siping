@@ -1,0 +1,337 @@
+{% extends "spindex.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="/static/bootstrap/js/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-multiselect.css" media="screen"/>
+<script type="text/javascript" src='/static/js/jquery.form.js'></script>
+
+<div class="container-fluid">
+<h2 align="center">新增新闻</h2>
+<hr/>
+  <div class="row">
+    <div class="col-xs-12 col-md-1"></div>
+    <div class="col-xs-12 col-md-10">
+
+      <div class="bs-example" data-example-id="simple-horizontal-form">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">标题</label>
+            <div class="col-sm-10">
+              <input type="input" class="form-control" id="title" ></div>
+          </div>
+          <div class="form-group">
+            <label for="shot_content" class="col-sm-2 control-label">摘要</label>
+            <div class="col-sm-10">
+              <input type="input" class="form-control" id="shot_content" ></div>
+          </div>
+          <div class="form-group">
+            <label for="author" class="col-sm-2 control-label">作者</label>
+            <div class="col-sm-10">
+              <input type="input" class="form-control" id="author" ></div>
+          </div>
+          <div class="form-group">
+            <label for="reporter" class="col-sm-2 control-label">编辑</label>
+            <div class="col-sm-10">
+              <input type="input" class="form-control" id="reporter" ></div>
+          </div>
+          <div class="form-group">
+            <label for="zebian" class="col-sm-2 control-label">责编</label>
+            <div class="col-sm-10">
+              <input type="input" class="form-control" id="zebian" ></div>
+          </div>
+          <div class="form-group">
+            <label for="tags" class="col-sm-2 control-label">关联标签</label>
+            <div class="col-sm-10">
+              <input type="input" class="form-control" id="tags" ></div>
+          </div>
+          <div class="form-group">
+            <label for="desc" class="col-sm-2 control-label">描述</label>
+            <div class="col-sm-10">
+              <input type="input" class="form-control" id="desc" ></div>
+          </div>
+          <div class="form-group">
+            <label for="ntype" class="col-sm-2 control-label">新闻类型</label>
+            <div class="col-sm-10">
+              <select id="ntype" class="form-control">
+                {% for data in sgdatas %}
+                  <option value="{{data.id}}">{{data.name}}</option>
+                {% endfor %}
+                <!-- <option value="1">四平新闻</option>
+                <option value="2">在你身边</option>
+                <option value="3">区县新闻</option>
+                <option value="4">视频展播</option>
+                <option value="5">精品栏目</option>
+                <option value="6">专栏宣传</option>
+                <option value="7">电台栏目</option>
+                <option value="8">专栏宣传</option>
+                <option value="9">其他</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="huodongid" class="col-sm-2 control-label">所属活动</label>
+            <div class="col-sm-10">
+              <select id="huodongid" class="form-control">
+                <option value="0">无活动</option>
+                {%for data in hdatas %}
+                <option value="{{data.id}}">{{data.name}}</option>
+                {%endfor%}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="image_media_path" class="col-sm-2 control-label">封面</label>
+            <div class="col-sm-10">
+              <!-- Button trigger modal -->
+              <button id="tofbtn" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal1">
+                选择封面图片
+              </button>
+              <!-- <select id="image_media_path" class="form-control" >
+                  {% for data in fdatas %}
+                  <option value="{{data.path}}">{{data.title}}</option>
+                  {% endfor %}
+              </select> -->
+          </div>
+        </div>
+          <div class="form-group">
+            <label for="media_path" class="col-sm-2 control-label">视频</label>
+            <div class="col-sm-10">
+              <button id="tosbtn" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+                选择视频文件
+              </button>
+               <!--  <select id="media_path" class="form-control" >
+                  {% for data in sdatas %}
+                  <option value="{{data.path}}">{{data.title}}</option>
+                  {% endfor %}
+              </select> -->
+          </div>
+        </div>
+          <div class="form-group">
+            <label for="content" class="col-sm-2 control-label">内容</label>
+            <div class="col-sm-10">
+              <textarea id="content" class="form-control" rows="8"></textarea>
+            </div>
+          </div>
+           <div class="form-group">
+            <label for="shot_content" class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+              <input id="savenews" type="button" class="btn btn-primary" value="保存" />
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <div class="col-xs-6 col-md-1"></div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">请选择封面图片</h4>
+      </div>
+      <div class="modal-body">
+        <form id="formfengmian" class="form-horizontal" action="/admin/uploadfengmian/" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="desc" class="col-sm-2 control-label">封面</label>
+          <div class="col-sm-10">
+            <input id="file_fengmian" name="file" class="btn btn-success" type="file" />
+          </div>
+        </div>
+      </form> 
+      </div>
+      <div class="modal-footer">
+        <button id="surefengmian" type="button" class="btn btn-primary" >确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">请选择视频文件</h4>
+      </div>
+      <div class="modal-body">
+        <form id="formshipin" class="form-horizontal" action="/admin/uploadshipin/" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="desc" class="col-sm-2 control-label">视频文件</label>
+          <div class="col-sm-10">
+            <input id="file_shipin" name="file" class="btn btn-success" type="file" />
+          </div>
+        </div>
+      </form> 
+      </div>
+      <div class="modal-footer">
+        <button id="sureshipin" type="button" class="btn btn-primary" >确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button -->
+        <h4 class="modal-title" id="myModalLabel">保存进度--成功后自动关闭～切勿手动关闭</h4>
+      </div>
+      <div class="modal-body">
+      <div class="progress">
+        <div id="save_progress" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+          20%
+        </div>
+      </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $("#surefengmian").click(function(){
+        var f = $("#file_fengmian").val();
+        if(f == ""){
+          alert("请选择封面文件！")
+        }else{
+          $("#tofbtn").html("已选好封面图片");
+          $('#myModal1').modal('hide');
+        }
+    });
+
+    $("#sureshipin").click(function(){
+        var f = $("#file_shipin").val();
+        if(f == ""){
+          alert("请选择视频文件！")
+        }else{
+          $("#tosbtn").html("已选好视频文件");
+          $('#myModal2').modal('hide');
+        }
+    });
+
+    // $('#image_media_path').multiselect(
+    //     {
+    //       maxHeight:400,
+    //       // includeSelectAllOption: true,
+    //       enableCaseInsensitiveFiltering: true
+    //     }
+    //   );
+    // $('#media_path').multiselect(
+    //     {
+    //       maxHeight:400,
+    //       // includeSelectAllOption: true,
+    //       enableCaseInsensitiveFiltering: true
+    //     }
+    //   );
+
+       $("#savenews").click(function(){
+          var flag = false;
+          var title = $("#title").val();
+          var shot_content = $("#shot_content").val();
+          var content = $("#content").val();
+          var author = $("#author").val();
+          var reporter = $("#reporter").val();
+          var zebian = $("#zebian").val();
+          var tags = $("#tags").val();
+          var desc = $("#desc").val();
+          var ntype = $("#ntype").val();
+          var huodongid = $("#huodongid").val();
+          var media_path = "";
+          var image_media_path = "";
+          if (title == "") {
+            alert("标题不能为空！");
+          }else if( shot_content == ""){
+            alert("摘要不能为空！")
+          }else if( author == ""){
+            alert("作者不能为空！")
+          }else if( reporter == ""){
+            alert("编辑不能为空！")
+          }else if( content == ""){
+            alert("内容不能为空！")
+          }else if( $.trim($("#tofbtn").html())  == "选择封面图片"){
+            alert("封面不能为空！")
+          }else if( $.trim($("#tosbtn").html())  == "选择视频文件"){
+            alert("视频不能为空！")
+          }else{
+            flag = true;
+          }
+          if (flag){
+            $("#myModal3").modal("show");
+            $("#save_progress").html("30%");
+            $("#save_progress").css("width","30%");
+            $('#formfengmian').ajaxSubmit(function(data) {
+                if(data['result'] !="error|未成功获取文件，上传失败"){
+                  $("#save_progress").html("30%");
+                  $("#save_progress").css("width","30%");
+                  image_media_path = data['result'];
+                  $('#formshipin').ajaxSubmit(function(data) {
+                      if(data['result'] !="error|未成功获取文件，上传失败"){
+                        $("#save_progress").html("70%");
+                        $("#save_progress").css("width","70%");
+                        media_path = data['result'];
+                        $.ajax({
+                            type:"POST",
+                                data:{"title":title,"shot_content":shot_content,'content':content,'author':author,'reporter':reporter,'zebian':zebian,'tags':tags,'desc':desc,'ntype':ntype,'media_path':media_path,'image_media_path':image_media_path,"huodongid":huodongid},
+                                url:"/admin/savenews/",
+                                success: function(data){
+                                  if(data['result']==1){
+                                      $("#save_progress").html("100%");
+                                      $("#save_progress").css("width","100%");
+                                      $("#myModal3").modal("hide");
+                                      location.href = "/admin/news_list/";
+                                  }else{
+                                    alert("添加新闻失败,请重新保存新闻！")
+                                    $("#myModal3").modal("hide");
+                                  }
+                                  }
+                        });
+                        
+                      }else{
+                        alert("视频上传失败，请重新保存新闻");
+                        $("#myModal3").modal("hide");
+                      }
+
+                  });
+
+
+                }else{
+                  alert("封面上传失败，请重新保存新闻");
+                  $("#myModal3").modal("hide");
+                }
+
+            });
+            
+            // $.ajax({
+            //     type:"POST",
+            //         data:{"title":title,"shot_content":shot_content,'content':content,'author':author,'reporter':reporter,'zebian':zebian,'tags':tags,'desc':desc,'ntype':ntype,'media_path':media_path,'image_media_path':image_media_path,"huodongid":huodongid},
+            //         url:"/admin/savenews/",
+            //         success: function(data){
+            //           if(data['result']==1){
+            //               alert("添加新闻成功！")
+            //               location.href = location.href;
+            //           }else{
+            //             alert("添加新闻失败！")
+            //           }
+            //           }
+            // });
+          }
+    });
+
+
+  });
+</script>
+{% endblock %}

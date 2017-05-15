@@ -1,0 +1,168 @@
+{% extends 'main.html' %}
+ 
+
+ 
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/style/css/video-show.css">
+<script type="text/javascript" src="/static/style/js/news-list.js"></script>
+<!-- If you'd like to support IE8 -->
+<!-- <script src="/static/js/videojs-ie8.min.js"></script> -->
+<!-- <link href="/static/css/video-js.min.css" rel="stylesheet"> -->
+<!-- <script src="/static/js/video.min.js"></script> -->
+
+<div class="main">
+	<div class="place">
+		<a href="#">视频新闻</a>
+		&gt;
+		<a href="#">{{response.news.title}}</a>
+	</div>
+	<div class="video">
+		<div class="play">
+			<div class="playvbwc clearfix">
+				<div class="v-playbox">
+					<div id="video" style="width:680px;height:400px;">
+						<div id="a1">
+							<video id="really-cool-video" class="video-js vjs-default-skin" controls
+							 preload="auto" width="680" height="437" poster="/static/media/fengmian/{{response.news.image_media_path}}"
+							 data-setup='{}'>
+								<source src="/static/media/shipin/{{response.news.media_path}}" type="video/mp4">
+								<p class="vjs-no-js">
+									To view this video please enable JavaScript, and consider upgrading to a web browser
+							    that
+									<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+								</p>
+							</video>
+						</div>
+					</div>
+
+				</div>
+				<div class="v-playright">
+					<div class="tit">相关视频</div>
+					<div class="video-nav">
+						<div class="video-wrapper">
+							{% for glnews in response.glnews_list%}
+							<input type="hidden" class="zblist" value="{{glnews.media_path}}" >
+							<a class="cell" href="/jingpinzhanboitem/?nid={{glnews.id}}">
+								<img src="/static/media/fengmian/{{glnews.image_media_path}}">
+								<span>{{glnews.shot_content}}</span>
+							</a>
+							{%endfor%}
+							<!-- <a class="cell">
+							<img src="style/imgs/video-cell-2.png">
+							<span>市委组织部召开部机关 组工干部大会.......</span>
+						</a>
+						<a class="cell">
+							<img src="style/imgs/video-cell-3.png">
+							<span>王宇带领市相关部门统治，</span>
+						</a>
+						<a class="cell">
+							<img src="style/imgs/video-cell-2.png">
+							<span>市委组织部召开部机关 组工干部大会.......</span>
+						</a>
+						-->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="bshare">
+			<span>
+				浏览：
+						{{response.news.read_num}}
+			</span>
+			<div class="bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1460367342813">
+				<a href="/static/media/shipin/{{response.news.media_path}}" class="bds_more" data-cmd="more"></a>
+				<a href="/static/media/shipin/{{response.news.media_path}}" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+				<a href="/static/media/shipin/{{response.news.media_path}}" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+				<a href="/static/media/shipin/{{response.news.media_path}}" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+				<a href="/static/media/shipin/{{response.news.media_path}}" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+				<a href="/static/media/shipin/{{response.news.media_path}}" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+			</div>
+			<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+		</div>
+	</div>
+	<!--<div class="info">
+	<img src="style/imgs/video-share.jpg"/>
+</div>
+-->
+<div class="intro">{{response.news.content}}</div>
+</div>
+<!--  -->
+<!-- 视频列表 -->
+<div class="video-list-wrapper clearfix">
+<div class="conts clearfix">
+	<ul>
+		{% for lnews in response.lnews_list%}
+		<a class="video-cell " href="/jingpinzhanboitem/?nid={{lnews.id}}">
+			<div class="shade" ></div>
+			<img src="/static/media/fengmian/{{lnews.image_media_path}}"/>
+			<h3>{{lnews.title}}</h3>
+			<p class="infos">
+				{{lnews.src}}
+				<span class="pubdate">{{lnews.lastmodify}}</span>
+			</p>
+			<p class="infos">
+				责编：{{lnews.zebian}}
+				<span class="viewtimes">{{lnews.read_num}}次预览</span>
+			</p>
+		</a>
+		{%endfor%}
+	</ul>
+</div>
+</div>
+
+<div class="pagebox clearfix">
+<ul>
+	{% if response.lnews_list.has_previous %}
+	<li>
+		<a href="/jingpinzhanboitem/?page={{ response.news.previous_page_number }}" id="prev_page" target="_self">上一页</a>
+	</li>
+	{% endif %}
+				{% for p in response.page_range %}
+				{% ifequal p page_objects.number %}
+	<li>
+		<a href="/jingpinzhanboitem/?page={{p}}" target="_self"  id="pageNow" style="color:red;">{{p}}</a>
+	</li>
+	{% else %}
+	<li>
+		<a href="/jingpinzhanboitem/?page={{p}}" target="_self">{{p}}</a>
+	</li>
+	{% endifequal%}
+				{% endfor %}
+				{% if response.lnews_list.has_next %}
+	<li>
+		<a href="/jingpinzhanboitem/?page={{ response.news.next_page_number }}" id="next_page" target="_self">下一页</a>
+	</li>
+	{% endif %}
+</ul>
+</div>
+</div>
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		var vlist = [];
+		$.each($(".zblist"),function(index,item){
+			vlist.push("/static/media/shipin/"+$(item).val());
+		});
+		    var myPlayer = videojs("really-cool-video");
+		                var cur = 0;
+		                myPlayer.play();
+		                myPlayer.on('ended', function() {
+		                    if (cur == vlist.length){
+		                        // alert("all ended")
+		                        cur=0
+		                    }else{
+		                        cur++;
+		                        myPlayer.src=vlist[cur];
+		                        myPlayer.play();
+		                    }
+		                  });
+
+    // var vList = ['/static/media/43.flv', '/static/media/43.flv']; // 初始化播放列表  
+
+
+
+  });
+</script>
+{% endblock %}

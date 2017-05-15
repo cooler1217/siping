@@ -1,0 +1,196 @@
+{% extends "spindex.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+<h2 align="center">封面管理</h2>
+<div>
+  <form class="form-inline" method="GET" action="/admin/addbanner/">
+  <div class="form-group">
+    <label for="title">标题</label>
+    <input type="text" class="form-control" name="title" id="title" placeholder="标题" value="{{title}}">
+  </div>
+<div class="form-group">
+    <label for="status">状态</label>
+    <select id="status" name="status" class="form-control">
+      <option value="0">未处理</option>
+      <option value="1">已发布</option>
+      <option value="2">以下线</option>
+    </select>
+</div>
+  <button type="submit" class="btn btn-default">搜索</button>
+</form>
+
+</div>
+<hr/>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  新增banner
+</button>
+<hr/>
+<div class="bs-example" data-example-id="hoverable-table">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>标题</th>
+          <th>图片</th>
+          <th>跳转地址</th>
+          <th>状态</th>
+          <th>描述</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for data in datas %}
+        <tr>
+          <th scope="row">{{data.id}}</th>
+          <td>{{data.title}}</td>
+          <td><a href="/static/media/banner/{{data.image_path}}" target="blank">{{data.image_path}}</a></td>
+          <td><a href="{{data.uri}}">{{data.uri}}</a></td>
+          <td>{{data.status}}</td>
+          <td>{{data.desc}}</td>
+          <td>
+            <input id="{{data.id}}" type="button" class="btn btn-danger delete" value="删除"/>
+          &nbsp;&nbsp;
+          <input id="{{data.id}}" type="button" class="btn btn-success fabu" value="发布"/>
+          &nbsp;&nbsp;
+          <input id="{{data.id}}" type="button" class="btn btn-warning xiaxian" value="下线"/>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">增加banner图片(1920X450)</h4>
+      </div>
+      <div class="modal-body">
+       <form id="formbanner" class="form-horizontal" action="/admin/uploadfile/" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+          <label for="title" class="col-sm-2 control-label">标题</label>
+          <div class="col-sm-10">
+            <input type="input" class="form-control" id="title" name="title" ></div>
+        </div>
+        <div class="form-group">
+          <label for="uri" class="col-sm-2 control-label">跳转地址</label>
+          <div class="col-sm-10">
+            <input type="input" class="form-control" id="uri" name="uri" ></div>
+        </div>
+        <div class="form-group">
+          <label for="desc" class="col-sm-2 control-label">描述</label>
+          <div class="col-sm-10">
+            <input type="input" class="form-control" id="desc" name="desc" ></div>
+        </div>
+        <div class="form-group">
+          <label for="desc" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <input id="file" name="file" class="btn" type="file" />
+            <input name="ftype" value="3"  type="hidden" />
+            <!-- <input type="submit" class="btn btn-success" name="Submit" value="增加封面图片" /> -->
+          </div>
+        </div>
+      </form> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="addbanner_btn">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+   <div >
+     总页数：{{total}}
+     <ul class="pagination">
+       {% for i in range(total) %}
+            {%if i == num %}
+       <li>
+         <a style="color:red" href="/admin/addbanner/{{i}}?title={{title}}&status={{status}}">{{i+1}}</a>
+       </li>
+       {% elif i> (num-10) and i< (num+10)%}
+              <li>
+         <a href="/admin/addbanner/{{i}}?title={{title}}&status={{status}}">{{i+1}}</a>
+       </li>
+       {% endif %}
+          {% endfor %}
+     </ul>
+   </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $("#addbanner_btn").click(function(){
+        $("#formbanner").submit();
+    });
+
+    $(".delete").click(function(){
+        var truthBeTold = window.confirm("确定删除这个banner？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid,"status":-1},
+              url:"/admin/changebanner/",
+              success: function(data){
+                if (data['result']) {
+                  alert("删除成功");
+                  location.href = location.href;
+                }else{
+                  alert("删除失败");
+                }
+              }
+          });
+        } 
+      })
+
+       $(".fabu").click(function(){
+        var truthBeTold = window.confirm("确定发布这个banner？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid,"status":1},
+              url:"/admin/changebanner/",
+              success: function(data){
+                if (data['result']) {
+                  alert("发布成功");
+                  location.href = location.href;
+                }else{
+                  alert("发布失败");
+                }
+              }
+          });
+        } 
+      })
+
+$(".xiaxian").click(function(){
+        var truthBeTold = window.confirm("确定下线这个banner？");
+        if (truthBeTold) {
+          var nid = $(this).attr("id");
+          $.ajax({
+              type:"POST",
+              data:{"nid":nid,"status":2},
+              url:"/admin/changebanner/",
+              success: function(data){
+                if (data['result']) {
+                  alert("下线成功");
+                  location.href = location.href;
+                }else{
+                  alert("下线失败");
+                }
+              }
+          });
+        } 
+      })
+
+  });
+</script>
+{% endblock %}

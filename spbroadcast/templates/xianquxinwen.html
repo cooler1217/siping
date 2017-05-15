@@ -1,0 +1,133 @@
+{% extends 'main.html' %}
+
+ 
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/style/css/common.css">
+<script type="text/javascript" src="/static/style/js/jquery.js"></script>
+<script type="text/javascript" src="/static/style/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/style/css/news-list.css">
+<script type="text/javascript" src="/static/style/js/news-list.js"></script>
+
+<div class="main">
+	<div class="banner">
+			<div class="banner-con">
+				{% for banner in response.banners%}
+				{%if forloop.first %}
+				<div id="{{banner.uri}}" class="banner-item " style="display: block; background:url(/static/media/banner/{{banner.image_path}}) center center;"> 
+				</div>
+				{%else%}
+				<div id="{{banner.uri}}" class="banner-item " style="display: none; background:url(/static/media/banner/{{banner.image_path}}) center center;">  
+				</div>	
+				{%endif%}
+				{%endfor%}
+				<!-- <div class="banner-item " style="display: none; background:url(/static/style/imgs/banner0.png) center center;"> 
+				</div>	
+				<div class="banner-item " style="display: none; background:url(/static//style/imgs/presenter.png) center center;">  
+				</div>	
+				<div class="banner-item " style="display: none; background:url(/static/style/imgs/banner0.png) center center;"> 
+				</div>	
+				<div class="banner-item " style="display: none; background:url(/static/style/imgs/video.png) center center;"> 
+				</div>	 -->	
+			</div>
+		 	<div class="rolling-nav">
+		 		{% for banner in response.banners%}
+		 		{%if forloop.first %}
+				<a data-id="0" href="javascript:void(0)" class="active"></a>
+				{%else%}
+				<a data-id="0" href="javascript:void(0)" ></a>
+				{%endif%}
+				{%endfor%}
+				<!-- <a data-id="1" href="javascript:void(0)" class=""></a>
+				<a data-id="2" href="javascript:void(0)" class=""></a>
+				<a data-id="3" href="javascript:void(0)" class=""></a> -->
+			</div>
+		</div>
+	<!-- 精品栏目 -->
+	<div class="news clearfix">
+		<div class="title clearfix">
+			<h2 class="title-font">
+				区县新闻
+				<span class="tit-slash">/</span>
+				<span class="tit-en">QUXIANXINWEN</span>
+			</h2>
+		</div>
+		<div class="news-conts">
+			{% for spnew in response.news.object_list%}
+			<div class="line-item clearfix">
+				<div class="pic-cont">
+					<a href="/xinwenbofangitem/?nid={{spnew.id}}">
+						<img src="/static/media/fengmian/{{spnew.image_media_path}}"/>
+					</a>
+				</div>
+				<div class="text-cont">
+					<a href="/xinwenbofangitem/?nid={{spnew.id}}">
+						<h3>{{spnew.title}}</h3>
+						<p class="brief">{{spnew.shot_content}}</p>
+						<span class="pubdate">{{spnew.lastmodify|date:"Y年m月d日"}}</span>
+					</a>
+					<p class="share-info">
+						<span class="text">分享到：</span>
+						<span class="bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1460367342813">
+							<a href="/static/media/shipin/{{spnew.media_path}}" class="bds_more" data-cmd="more"></a>
+							<a href="/static/media/shipin/{{spnew.media_path}}" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+							<a href="/static/media/shipin/{{spnew.media_path}}" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+							<a href="/static/media/shipin/{{spnew.media_path}}" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+							<a href="/static/media/shipin/{{spnew.media_path}}" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+							<a href="/static/media/shipin/{{spnew.media_path}}" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+						</span>
+						<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+						<span class="info">
+							<!-- {{spnew.read_num}}次观看 -->
+							<small>来源：</small>
+							{{spnew.src}}
+							<small>编辑：</small>
+							{{spnew.report}}
+							<small>责编：</small>
+							{{spnew.zebian}}
+						</span>
+					</p>
+				</div>
+			</div>
+			{%endfor%}
+			<!--  -->
+		</div>
+		<div class="pagebox clearfix">
+			<ul>
+				{% if response.news.has_previous %}
+				<li>
+					<a href="/xianquxinwen/?page={{ response.news.previous_page_number }}" id="prev_page" target="_self">上一页</a>
+				</li>
+				{% endif %}
+				{% for p in response.page_range %}
+				{% ifequal p page_objects.number %}
+				<li>
+					<a href="/xianquxinwen/?page={{p}}" target="_self"  id="pageNow" style="color:red;">{{p}}</a>
+				</li>
+				{% else %}
+				<li>
+					<a href="/xianquxinwen/?page={{p}}" target="_self">{{p}}</a>
+				</li>
+				{% endifequal%}
+				{% endfor %}
+				{% if response.news.has_next %}
+				<li>
+					<a href="/xianquxinwen/?page={{ response.news.next_page_number }}" id="next_page" target="_self">下一页</a>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+	$(".banner-item").click(function(){
+		window.open($(this).attr("id")); 
+	})
+		// $("#pageNow").css({"color":"red");
+		// alert($("#pageNow"));
+	});
+</script>
+
+{% endblock %}	

@@ -1,0 +1,131 @@
+.main {
+}
+/**banner*/
+.main .banner {
+	position: relative;
+	min-width: 1024px;
+	width:100%;
+	height:auto;
+	margin: 0 auto;
+	background-color:#A7A7A7;
+	overflow: hidden;
+	*zoom: 1;
+}
+
+.banner .banner-con{
+	position: relative;
+	min-width: 1024px;
+	width:100%;
+	height: 450px;
+	margin: 0px auto;
+} 
+
+.banner .banner-con .banner-item {
+	min-width: 1024px;
+	width:100%;
+	height: 450px;
+	display: none;
+}
+
+.banner .rolling-nav {
+	position: absolute;
+	width: 100%;
+	height: 16px;
+	left: 45%;
+	bottom: 10px;
+	text-align: left;
+	z-index: 3;
+}
+.banner .rolling-nav a {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	margin: 2px;
+	outline: 0;
+	background-image: url("../imgs/banner-dot.png");
+	background-position: 0 -26px;
+	background-repeat: no-repeat;
+}
+
+.banner .rolling-nav a.active {
+	background-position: 0 -1px;
+}
+
+.main .video-show-title {
+	
+}
+.main .video-list{
+	position: relative;
+ 	width: 1024px;
+ 	height:auto;
+	margin: 5px auto;
+ 	overflow: hidden;
+ 	background:#FFF;
+}
+
+.news-list .title {
+	position:relative;
+	width:1024px;
+	height:48px;
+	text-align: left;
+	line-height:48px;
+	font-size:22px;
+	border-bottom: 1px solid #D3D3D3;
+}
+
+.video-list .box {
+	position: relative;
+    float: left;
+    width: 320px;
+    height: 310px;
+    padding: 5px;
+    margin: 10px 4px;
+    border: 1px solid #FFF;
+}
+
+.video-list .box:hover {
+    border: 1px solid #d3d3d3;
+    -webkit-box-shadow: 0 0 6px 3px #DDD;
+    -moz-box-shadow: 0 0 6px 3px #DDD;
+    box-shadow: 0 0 6px 3px #DDD;
+}
+
+.box .title{
+	margin: 10px 0;
+	color: #333;
+	font-size: 18px;
+}
+.box .infos {
+	margin: 10px 0;
+	color: #666;
+	font-size: 16px;
+}
+
+.box .infos .pubdate, 
+.box .infos .viewtimes{
+	float: right;
+}
+
+ .line-item .item-img{
+	float:left;
+	width:160px;
+}
+ .line-item .item-summary{
+	float:right;
+	width:760px;
+}
+ .line-item .item-summary .title {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #333;
+}
+
+ .line-item .item-summary .infos {
+	color: #666;
+}
+
+ .line-item .item-summary .pubdate {
+	color: #666;
+	text-align: right;
+	font-size: 14px;
+}

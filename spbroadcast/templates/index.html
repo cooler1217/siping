@@ -1,0 +1,440 @@
+{% extends 'main.html' %}
+ 
+ 
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/style/css/home.css">
+<script type="text/javascript" src="/static/style/js/home.js"></script>
+
+	<div class="main">
+		<div class="banner">
+			<div class="banner-con">
+				{% for banner in response.banners%}
+				{%if forloop.first %}
+				<div id="{{banner.uri}}" class="banner-item " style="display: block; background:url(/static/media/banner/{{banner.image_path}}) center center no-repeat;;"> 
+				</div>
+				{%else%}
+				<div id="{{banner.uri}}" class="banner-item " style="display: none; background:url(/static/media/banner/{{banner.image_path}}) center center no-repeat;;">  
+				</div>	
+				{%endif%}
+				{%endfor%}
+
+			</div>
+		 	<div class="rolling-nav">
+		 		{% for banner in response.banners%}
+		 		{%if forloop.first %}
+				<a data-id="0" href="javascript:void(0)" class="active"></a>
+				{%else%}
+				<a data-id="0" href="javascript:void(0)" ></a>
+				{%endif%}
+				{%endfor%}
+			</div>
+		</div>
+		<!-- 四平新闻 -->
+		<div class="row news-row">
+			<div class="row-con news-con">
+				<div class="tab-tit clearfix">	
+					<ul class="tab-nav">
+						<li class="current">四平新闻</li>
+						<li>在你身边</li>
+						<li>县市区新闻</li>
+					</ul>
+			        <a href="/sipingxinwen/" class="more" target="_blank">MORE&gt;&gt;</a>
+				</div>
+				<div class="tab-conts">
+					<div class="tab-item">
+						<div class="in left">
+						{% for nw in response.spxw_list%}
+							{%if forloop.first %}
+						
+							<a class=" clearfix">
+								<img src="/static/media/fengmian/{{nw.image_media_path}}" alt="news">
+								<h3>{{nw.title}}</h3>
+								<p class="intro">
+									{{nw.shot_content}}
+									<br/><span class="pubdate">{{nw.createtime|date:"Y年m月d日"}}</span>
+									</p>
+								
+							</a>
+							{%else%}
+							{%endif%}
+						{%endfor%}
+						</div>
+						<div class="in right">
+						{% for nw in response.spxw_list%}
+							{%if forloop.first %}
+							{%else%}
+							<a>
+								<img alt="news" src="/static/media/fengmian/{{nw.image_media_path}}">
+								<h3>{{nw.title}}</h3>
+								<p class="intro">{{nw.shot_content}}
+									<span class="pubdate">{{nw.createtime|date:"Y年m月d日"}}</span>
+									</p>
+							</a>
+							{%endif%}
+						{%endfor%}
+						</div>
+					</div>
+					<div class="tab-item" style="display:none;">
+						<div class="in left">
+						{% for nw in response.znsb_list%}
+							{%if forloop.first %}
+						
+							<a class=" clearfix">
+								<img src="/static/media/fengmian/{{nw.image_media_path}}" alt="news">
+								<h3>{{nw.title}}</h3>
+								<p class="intro">
+									{{nw.shot_content}}
+									<br/><span class="pubdate">{{nw.createtime|date:"Y年m月d日"}}</span>
+									</p>
+								
+							</a>
+							{%else%}
+							{%endif%}
+						{%endfor%}
+						</div>
+						<div class="in right">
+						{% for nw in response.znsb_list%}
+							{%if forloop.first %}
+							{%else%}
+							<a>
+								<img alt="news" src="/static/media/fengmian/{{nw.image_media_path}}">
+								<h3>{{nw.title}}</h3>
+								<p class="intro">{{nw.shot_content}}
+									<span class="pubdate">{{nw.createtime|date:"Y年m月d日"}}</span>
+									</p>
+							</a>
+							{%endif%}
+						{%endfor%}
+						</div>
+					</div>
+					<div class="tab-item" style="display:none;">
+						<div class="in left">
+						{% for nw in response.qxxw_list%}
+							{%if forloop.first %}
+						
+							<a class=" clearfix">
+								<img src="/static/media/fengmian/{{nw.image_media_path}}" alt="news">
+								<h3>{{nw.title}}</h3>
+								<p class="intro">
+									{{nw.shot_content}}
+									<br/><span class="pubdate">{{nw.createtime|date:"Y年m月d日"}}</span>
+									</p>
+								
+							</a>
+							{%else%}
+							{%endif%}
+						{%endfor%}
+						</div>
+						<div class="in right">
+						{% for nw in response.qxxw_list%}
+							{%if forloop.first %}
+							{%else%}
+							<a>
+								<img alt="news" src="/static/media/fengmian/{{nw.image_media_path}}">
+								<h3>{{nw.title}}</h3>
+								<p class="intro">{{nw.shot_content}}
+									<span class="pubdate">{{nw.createtime|date:"Y年m月d日"}}</span>
+									</p>
+							</a>
+							{%endif%}
+						{%endfor%}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 四平公告 -->
+		<div class="row notice-row">
+			<div class="row-con notice clearfix">
+				<div class="part-affiche">
+					<div class="title clearfix">
+						<h2 class="title-font">
+							四平公告
+							<span class="tit-slash">/</span>
+							<span class="tit-en">DYNAMIC</span>
+						</h2>
+						<div class="more">
+			                <a href="/gonggaolist" class="more" target="_blank">MORE&gt;&gt;</a>
+			            </div>
+					</div>
+					<div class="content">
+						<ul>
+							{% for gonggao in response.gonggao_list%}
+							{% ifequal gonggao.gtype 1 %}
+							<li><a href="/gonggaoitem/?gid={{gonggao.id}}">{{gonggao.title}}</a><span class="time">{{gonggao.createtime|date:"Y年m月d日"}}</span></li>
+							{%else%}
+							<li><a href="{{gonggao.url}}" target="_blank">{{gonggao.title}}</a><span class="time">{{gonggao.createtime|date:"Y年m月d日"}}</span></li>
+							{%endifequal%}
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+				<div class="part-publicity">
+					<div class="title">
+						<h2 class="title-font">专栏宣传
+							<span class="tit-slash">/</span>
+							<span class="tit-en">PUBLICITY</span>
+						</h2>
+						<div class="more">
+			                <a href="/zhuanlanxuanchuan/" class="more" >MORE&gt;&gt;</a>
+			            </div>
+					</div>
+					<div class="content">
+						{% for spgroup in response.spgroup_list%}
+						<a href="/jingpinlanmu/?ntype={{spgroup.id}}">
+							
+							<img src="/static/media/gonggao/{{spgroup.image_path}}" style="vertical-align: middle;width: 450px;height:360px;"/>
+						</a>
+						{% endfor %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 精品栏目 -->
+		<div class="row column-row">
+			<div class="row-con column">
+				<div class="title clearfix">	
+					<h2>
+						精品栏目
+						<span class="tit-slash">/</span>
+						<span class="tit-en">COLUMN</span>
+					</h2>
+					<div class="more">
+						<a href="/jingpinlanmu/" class="more" target="_blank">MORE&gt;&gt;</a>
+					</div>
+				</div>
+				<div class="cont clearfix " id="jplm_4" >
+				</div>
+			</div>
+		</div>
+		<!-- 视频展播 -->
+		<div class="row video-row ">
+			<div class="row-con video">
+				<div class="tab-tit clearfix sec-shipinzhanbo">	
+					<ul class="tab-nav">
+						<li class="current">视频展播</li>
+						<li>精品栏目</li>
+						<li>电台栏目</li>
+					</ul>
+					<div class="more">
+			           <a href="/shipinzhanbo/" class="more" target="_blank">MORE&gt;&gt;</a>
+		            </div>
+				</div>
+				<div class="tab-conts">
+					<div class="tab-item">
+						<div class="in left">
+						{% for spzb in response.spzb_list%}
+						{%if forloop.first %}					
+							<a href="/jingpinzhanboitem/?nid={{spzb.id}}">
+								<img src="/static/media/fengmian/{{spzb.image_media_path}}" alt="news">
+								<p class="intro excerpt">{{spzb.shot_content}}</p>
+								<!-- <p class="times">{{spzb.read_num}}次播放</p> -->
+							</a>
+						{%endif%}
+						{%endfor%}
+						</div>
+						<div class="in right">
+						{% for spzb in response.spzb_list%}
+						{%if forloop.first %}
+						
+							{%else%}
+							<a class="cell" style="margin-right:15px;" href="/jingpinzhanboitem/?nid={{spzb.id}}">
+								<img src="/static/media/fengmian/{{spzb.image_media_path}}"/>
+								<span>{{spzb.title}}</span>
+							</a>
+
+						{%endif%}
+						{%endfor%}
+						</div>
+					</div> 
+					
+					<div class="tab-item" style="display:none;"> 
+						<div class="in left">
+						{% for jplm in response.jplm_list%}
+						{%if forloop.first %}					
+							<a href="/jingpinzhanboitem/?nid={{jplm.id}}">
+								<img src="/static/media/fengmian/{{jplm.image_media_path}}" alt="news">
+								<p class="intro excerpt">{{jplm.shot_content}}</p>
+								<!-- <p class="times">{{jplm.read_num}}次播放</p> -->
+							</a>
+						{%endif%}
+						{%endfor%}
+						</div>
+						<div class="in right">
+						{% for jplm in response.jplm_list%}
+						{%if forloop.first %}
+						
+							{%else%}
+							<a class="cell" style="margin-right:15px;" href="/jingpinzhanboitem/?nid={{jplm.id}}">
+								<img src="/static/media/fengmian/{{jplm.image_media_path}}"/>
+								<span>{{jplm.title}}</span>
+							</a>
+
+						{%endif%}
+						{%endfor%}
+						</div>
+					</div> 
+					<div class="tab-item" style="display:none;"> 
+						<div class="in left">
+						{% for dtlm in response.dtlm_list%}
+						{%if forloop.first %}					
+							<a href="/jingpinzhanboitem/?nid={{dtlm.id}}">
+								<img src="/static/media/fengmian/{{dtlm.image_media_path}}" alt="news">
+								<p class="intro excerpt">{{dtlm.shot_content}}</p>
+								<!-- <p class="times">{{dtlm.read_num}}次播放</p> -->
+							</a>
+						{%endif%}
+						{%endfor%}
+						</div>
+						<div class="in right">
+						{% for dtlm in response.dtlm_list%}
+						{%if forloop.first %}
+						
+							{%else%}
+							<a class="cell" style="margin-right:15px;" href="/jingpinzhanboitem/?nid={{dtlm.id}}">
+								<img src="/static/media/fengmian/{{dtlm.image_media_path}}"/>
+								<span>{{dtlm.title}}</span>
+							</a>
+
+						{%endif%}
+						{%endfor%}
+						</div>
+					</div> 
+				</div>
+			</div>
+		</div>
+		<!-- 主持人 -->
+		<div class="row presenter-row ">
+			<div class="row-con presenter">
+				<div class="tab-tit clearfix">	
+					<ul class="tab-nav">
+						<li class="current">电视主持人</li>
+						<li>广播主持人</li>
+						<li>记者风采</li>
+					</ul>
+			           <a href="#" class="more" target="_blank">MORE&gt;&gt;</a>
+				</div>
+				<div class="tab-conts">
+					<div class="tab-item">
+							<a class="cell people">
+								<div class="shade"> </div> 
+								<img class="pic" src="/static/style/imgs/presenter.png">
+								<div class="intro" >
+									<div class="job" >
+										新闻联播
+									</div>
+									<div class="name" >
+										李美妍
+									</div>
+								</div> 
+							</a>
+							<a class="cell people">
+								<div class="shade"> </div> 
+								<img class="pic" src="/static/style/imgs/presenter.png">
+								<div class="intro" >
+									<div class="job" >
+										新闻联播
+									</div>
+									<div class="name" >
+										李美妍
+									</div>
+								</div> 
+							</a>
+							<a class="cell people">
+								<div class="shade"> </div> 
+								<img class="pic" src="/static/style/imgs/presenter.png">
+								<div class="intro" >
+									<div class="job" >
+										新闻联播
+									</div>
+									<div class="name" >
+										李美妍
+									</div>
+								</div> 
+							</a>
+							<a class="cell people end">
+								<div class="shade"> </div> 
+								<img class="pic" src="/static/style/imgs/presenter.png">
+								<div class="intro" >
+									<div class="job" >
+										新闻联播
+									</div>
+									<div class="name" >
+										李美妍
+									</div>
+								</div> 
+							</a>
+					</div>  
+					
+					<div class="tab-item" style="display:none;">
+							<a class="cell">
+								<img src="/static/style/imgs/presenter.png"/>
+								<span>222，</span>
+							</a>
+							<a class="cell end">
+								<img src="/static/style/imgs/presenter.png"/>
+								<span>22，</span>
+							</a>
+							<a class="cell">
+								<img src="/static/style/imgs/presenter.png"/>
+								<span>222，</span>
+							</a>
+					</div>
+					
+					<div class="tab-item" style="display:none;">
+							<a class="cell">
+								<img src="/static/style/imgs/presenter.png"/>
+								<span>33，</span>
+							</a>
+							<a class="cell end">
+								<img src="/static/style/imgs/presenter.png"/>
+								<span>33，</span>
+							</a>
+							<a class="cell">
+								<img src="/static/style/imgs/presenter.png"/>
+								<span>33，</span>
+							</a>
+					</div>    
+				</div>
+			</div>
+		</div>
+	{% include 'youqinglianjie.html' %}
+	</div>
+<script type="text/javascript">
+
+$(function(){
+
+
+	$(".banner-item").click(function(){
+		window.open($(this).attr("id")); 
+	})
+
+	
+
+	function initJPLM(){
+		$.ajax({
+			url:"/getNewsList/?ntype=5",
+			type:"GET",
+			success:function(data){
+				var html = ""
+				$.each(data.news,function(i,item){
+					if(i<4){
+						html += '<a class="column-cell" style="margin-right:24px;" href="/xinwenbofangitem/?nid='+item.id+'">'+
+							'<img src="/static/media/fengmian/'+item.image_media_path+'"/>'+
+							'<span>'+item.title+'</span>'+
+						'</a>';
+					}
+
+				});
+				$("#jplm_4").html(html);
+				// $("#jplm_4").find("a").addClass("column-cel")
+			}
+
+		})
+		
+	}
+	initJPLM();
+});
+</script>
+{% endblock %}	

@@ -1,0 +1,76 @@
+{% extends "beehoo.html" %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/static/css/wangEditor.css">
+    <script type="text/javascript" src='/static/js/wangEditor.js'></script>
+
+<h1 align="center">推送内容</h1>
+<hr/>
+<div class="container-fluid">
+  <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+  <div class="row">
+    <!--用父容器来控制宽度-->  
+    <div class="col-xs-12 col-md-6">
+
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="title" class="col-sm-2 control-label">标题</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="title" placeholder="标题"></div>
+        </div>
+        <div class="form-group">
+          <label for="abstract" class="col-sm-2 control-label">摘要</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="abstract" placeholder="摘要"></div>
+        </div>
+
+      </form>
+    <div style="padding-left:50px;">
+      <label>推送正文</label>
+      <div id="div1" style="height:400px;max-height:500px;">
+        <p>请输入内容...</p>
+      </div>
+      <input id="addpushmsg" type="button" class="btn btn-success"  value="提交推送内容" />  
+    </div>
+      <!--用当前元素来控制高度-->  
+    </div>
+    <div class="col-xs-12 col-md-6">.col-xs-6 .col-md-4</div>
+
+  </div>
+
+  </div>
+
+         
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+
+    
+   var editor = new wangEditor('div1');
+
+// 上传图片
+    editor.config.uploadImgUrl = '/appmanager/uploadwang';
+
+    editor.create();
+    
+    $("#addpushmsg").click(function(){
+          var title = $("#title").val();
+          var abstract = $("#abstract").val();
+          var content =  editor.$txt.html();
+          $.ajax({
+                    type:"POST",
+                    data:{"title":title,"abstract":abstract,'content':content},
+                    url:"/appmanager/savepush/",
+                    success: function(data){
+                      alert(data['result']);
+                      location.href = location.href;
+                      }
+                  });
+    });
+  });
+
+</script>
+{% endblock %}

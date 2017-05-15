@@ -1,0 +1,144 @@
+.main {
+	  /*background-color: #EFF3F5;*/
+}
+/**banner*/
+.main .banner {
+	position: relative;
+	min-width: 1024px;
+	width:100%;
+	height:auto;
+	margin: 0 auto;
+	background-color:#A7A7A7;
+	overflow: hidden;
+	*zoom: 1;
+}
+
+.banner .banner-con{
+	position: relative;
+	min-width: 1024px;
+	width:100%;
+	height: 450px;
+	margin: 0px auto;
+} 
+
+.banner .banner-con .banner-item {
+	min-width: 1024px;
+	width:100%;
+	height: 450px;
+	display: none;
+}
+
+.banner .rolling-nav {
+	position: absolute;
+	width: 100%;
+	height: 16px;
+	left: 45%;
+	bottom: 10px;
+	text-align: left;
+	z-index: 3;
+}
+.banner .rolling-nav a {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	margin: 2px;
+	outline: 0;
+	background-image: url("../imgs/banner-dot.png");
+	background-position: 0 -26px;
+	background-repeat: no-repeat;
+}
+
+.banner .rolling-nav a.active {
+	background-position: 0 -1px;
+}
+
+.main .column-wrapper{
+  position: relative;
+  width: 1024px;
+  min-height: 800px;
+  margin: 0 auto;
+  padding: 60px 0 60px 0;
+  background: #FFF;
+}
+
+
+.column-wrapper .conts {
+	position: relative;
+	width: 1024px;
+	height: auto;  
+	padding-top: 60px;
+  	padding-bottom: 60px;
+}
+.conts ul {
+	margin-left: -30px;
+}
+
+.column-wrapper ul .column-cell {
+	position: relative;
+	float: left;
+	width: 320px;
+  height: 339px;
+	margin-left: 31px;
+	margin-bottom: 50px;
+	cursor:pointer;
+}
+ul .column-cell:hover .shade {
+  opacity: 1;
+  filter: alpha(opacity=50);
+  text-decoration: underline;
+}
+.column-cell .shade {
+  border: 1px solid #ccc;
+  -webkit-border:0px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  *zoom:1;
+  position: absolute;
+  z-index: 1;
+  top: -16px;
+  right: -14px;
+  bottom: -16px;
+  left: -14px;
+  background-color: #FFF;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+.column-cell .shade:after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.column-cell .pic {
+	position: relative;
+  	z-index: 2;
+	width: 320px;
+	height: 205px;
+	line-height: 205px;
+}
+
+.column-cell .pic img{
+	width: 320px;
+	height: 205px;
+}
+
+ .column-cell h3 {
+ 	position: relative;
+ 	z-index: 2;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 18px;
+	color: #333;
+  line-height: 30px;
+}
+
+ .column-cell .intro {
+ 	position: relative;
+ 	z-index: 2;
+	font-size: 14px;
+	color: #666;
+  line-height: 30px;
+}
+

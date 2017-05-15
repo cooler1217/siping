@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn" class="body-full-height">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="./resource/favicon.png">
+	<title>壁虎登录</title>
+	<!--
+	<script src="./resource/athens/js/require.js"></script>
+	<script src="./resource/athens/js/app/config.js"></script>
+	 -->
+	 <link rel="stylesheet" type="text/css" id="theme" href="/static/css/theme-default.css"/> 
+	<link rel="stylesheet" type="text/css" href="/static/css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/style1.css" />
+</head>
+<body>
+<ul class="cb-slideshow">
+	<li><span>Image 01</span><div></div></li>
+	<li><span>Image 02</span><div></div></li>
+	<li><span>Image 03</span><div></div></li>
+	<li><span>Image 04</span><div></div></li>
+	<li><span>Image 05</span><div></div></li>
+	<li><span>Image 06</span><div></div></li>
+</ul>
+<div class="login-container">
+
+	<div class="login-box animated fadeInDown">
+		<div class="login-logo"></div>
+		<div class="login-body">
+			<div class="login-title"></div>
+
+				<form action="" method="post" role="form" class="form-horizontal" onsubmit="return formcheck();">
+				<div class="form-group">
+					<div class="col-md-12">
+						<input name="username" type="text" class="form-control" placeholder="请输入用户名登录"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<input name="password" type="password" class="form-control" placeholder="请输入您的密码"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-6">
+						<label class="checkbox-inline" >
+							<input type="checkbox" value="true" name="rememberme"> <span style="color:#fff;">记住用户名 </span>
+						</label>
+
+					</div>
+					<div class="col-md-6">
+						<input type="submit" name="submit" value="登录" class="btn btn-info btn-block" />
+						<input name="token" value="6fdf3c12" type="hidden" />
+
+					</div>
+				</div>
+
+				<div class="login-subtitle">
+					还没有壁虎账号?立刻 <a href="#">创建一个帐号</a>
+				</div>
+			</form>
+		</div>
+		
+	</div>
+	<style>
+	footer{position:fixed; bottom:0px; left:0px;right:0px;height:50px;background:rgba(51, 65, 78, 0.58);color:#fff;}
+	.login-footer{ width:980px; margin:0 auto;padding:0px}
+	.pull-right a{color:#fff;}
+	.pull-left,.pull-right{line-height: 50px;}
+	.login-container .login-box{margin: 7% 55%;}
+	</style>
+<footer >
+<div class="login-footer">
+			<div class="pull-left">
+				
+			</div>
+			<div class="pull-right">
+				<a href="#">关于我们</a> |
+				<a href="#">提供服务</a> |
+				<a href="#">联系我们</a> |
+				&copy; 2015 cooler
+			</div>
+		</div>
+</footer>
+</div>
+
+<script>
+function formcheck() {
+	if($('#remember:checked').length == 1) {
+		cookie.set('remember-username', $(':text[name="username"]').val());
+	} else {
+		cookie.del('remember-username');
+	}
+	return true;
+}
+
+</script>
+</body>
+</html>

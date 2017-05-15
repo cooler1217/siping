@@ -1,0 +1,9 @@
+$(function(){ 
+	   	 $('#down').addClass('current');
+
+});
+
+
+ 
+ 
+ 

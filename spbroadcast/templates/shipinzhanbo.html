@@ -1,0 +1,102 @@
+{% extends 'main.html' %}
+ 
+
+ 
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/style/css/column.css">
+<script type="text/javascript" src="/static/style/js/news-list.js"></script>
+
+<div class="main">
+	<div class="banner">
+		<div class="banner-con">
+			{% for banner in response.banners%}
+				{%if forloop.first %}
+			<div id="{{banner.uri}}" class="banner-item " style="display: block; background:url(/static/media/banner/{{banner.image_path}}) center center;"></div>
+			{%else%}
+			<div id="{{banner.uri}}" class="banner-item " style="display: none; background:url(/static/media/banner/{{banner.image_path}}) center center;"></div>
+			{%endif%}
+				{%endfor%}
+			<!-- <div class="banner-item " style="display: none; background:url(/static/style/imgs/banner0.png) center center;"></div>
+		<div class="banner-item " style="display: none; background:url(/static//style/imgs/presenter.png) center center;"></div>
+		<div class="banner-item " style="display: none; background:url(/static/style/imgs/banner0.png) center center;"></div>
+		<div class="banner-item " style="display: none; background:url(/static/style/imgs/video.png) center center;"></div>
+		-->
+	</div>
+	<div class="rolling-nav">
+		{% for banner in response.banners%}
+		 		{%if forloop.first %}
+		<a data-id="0" href="javascript:void(0)" class="active"></a>
+		{%else%}
+		<a data-id="0" href="javascript:void(0)" ></a>
+		{%endif%}
+				{%endfor%}
+		<!-- <a data-id="1" href="javascript:void(0)" class=""></a>
+	<a data-id="2" href="javascript:void(0)" class=""></a>
+	<a data-id="3" href="javascript:void(0)" class=""></a>
+	-->
+	</div>
+	</div>
+	<!-- 精品栏目 -->
+	<div class="column-wrapper clearfix">
+		<div class="sec-title">
+			<h2 class="title-font">
+				视频展播
+				<span class="tit-slash">/</span>
+				<span class="tit-en">COLUMN</span>
+			</h2>
+		</div>
+		<div class="conts clearfix">
+			<ul>
+				{% for spnew in response.news.object_list%}
+				<a class="column-cell " href="/jingpinzhanboitem/?nid={{spnew.id}}">
+					<div class="shade" ></div>
+					<p class="pic">
+						<img src="/static/media/fengmian/{{spnew.image_media_path}}"/>
+					</p>
+					<h3>{{spnew.title}}</h3>
+					<p class="intro">{{spnew.shot_content}}</p>
+				</a>
+				{%endfor%}
+				
+			</ul>
+		</div>
+	</div>
+
+	<div class="pagebox clearfix">
+		<ul>
+			{% if response.news.has_previous %}
+			<li>
+				<a href="/jingpinlanmu/?page={{ response.news.previous_page_number }}" id="prev_page" target="_self">上一页</a>
+			</li>
+			{% endif %}
+				{% for p in response.page_range %}
+				{% ifequal p page_objects.number %}
+			<li>
+				<a href="/jingpinlanmu/?page={{p}}" target="_self"  id="pageNow" style="color:red;">{{p}}</a>
+			</li>
+			{% else %}
+			<li>
+				<a href="/jingpinlanmu/?page={{p}}" target="_self">{{p}}</a>
+			</li>
+			{% endifequal%}
+				{% endfor %}
+				{% if response.news.has_next %}
+			<li>
+				<a href="/jingpinlanmu/?page={{ response.news.next_page_number }}" id="next_page" target="_self">下一页</a>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+	$(".banner-item").click(function(){
+		window.open($(this).attr("id")); 
+	})
+		// $("#pageNow").css({"color":"red");
+		// alert($("#pageNow"));
+	});
+</script>
+{% endblock %}

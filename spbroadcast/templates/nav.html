@@ -1,0 +1,60 @@
+
+<!-- <script type="text/javascript" src="/static/style/js/loginForm.js"></script> -->
+<div class="header">
+
+	<div class="header-con">
+		<div class="logo">
+			<a class="main-logo" href="#"></a>
+		</div>	 
+		<div class="weather">
+			<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&icon=1&num=2"></iframe>
+		</div>
+		<div class="search">
+			{% if response.userinfo != None %}
+			<div class="sec-log-reg">{{response.userinfo.username}}&nbsp;&nbsp;&nbsp;&nbsp;<a href="/logout">登出</a></div>
+			{%else%}
+			<div class="sec-log-reg"><a href="/tologin/">登录</a>/<a href="/toregist/">注册</a></div>
+			{%endif%}
+			<form >
+			<div class="align-right">
+				<input id="tag_search" name="passwordtwo" type="text" 
+						class="search-input" value="请输入你要搜索的关键字" 
+						onfocus="if(this.value=='请输入你要搜索的关键字') this.value=''; this.style.color='#333'; return true;" 
+						onblur="if(this.value=='') this.value='请输入你要搜索的关键字'; this.style.color='#cccccc'; return true;"
+						style="color: #cccccc;">
+				<input id="news_search" type="button" value="搜索" class="search-btn">
+			</div>
+			</form>
+		</div>
+	</div>
+
+
+
+
+
+ <div class="wrapper-nav">
+    	<ul class="nav title-font" >
+			<li><a id="home" href="/index/">网站首页</a></li> 
+			<li><a id="" href="/sipingxinwen/">四平新闻</a></li>
+			<li><a id="" href="/zainishenbian/">在你身边</a></li>
+			<li><a id="" href="/xianquxinwen/">县区新闻</a></li> 
+			<li><a id="" href="/zhuanlanxuanchuan/">专栏宣传</a></li>
+			<li><a id="" href="/jingpinlanmu/">精品栏目</a></li>
+			<li><a id="" href="/huodongtoupiao/">活动投票</a></li>
+			<li><a id="" href="/shipinzhanbo/">视频展播</a></li>
+			<li><a id="" href="/index/">本地生活</a></li>
+    	</ul>
+ </div>
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#news_search").click(function(){
+			var tag_search = $("#tag_search").val();
+			location.href="/sipingxinwen/?tag_search="+tag_search;
+		});
+	
+	});
+</script>
+

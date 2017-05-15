@@ -1,0 +1,151 @@
+.main {    
+	width: 1024px;
+    margin: 0 auto;
+}
+/**banner*/
+.main .place {
+	width: 1024px;
+    height: 20px;
+    margin: 20px auto;
+    text-align: left;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+}
+.main .place a{
+	color:#333;
+}
+.main .person-info {
+    position: relative;
+	width: 1014px;
+	height:528px;
+	padding:5px;
+	margin: 0 auto;
+	text-align: left;
+	background-color:#252422;
+}
+.main .person-info .pic{
+	width:450px;
+	height:528px;
+}
+.main .person-info .text{
+	
+	position: absolute;
+    right: 0;
+    top: 0;
+	width:500px;
+	height:450px;
+	padding:20px 30px;
+}
+.main .person-info .text p{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: left;
+    color: #999;
+}
+
+.main .presenter-list {
+	width: 1024px;
+	height: 400px;
+	margin: 50px auto;
+	position: relative;
+    overflow: hidden;
+}  
+.presenter-list ul {
+	position: absolute;
+    height: 400px;
+}
+.presenter-list ul li{
+	float:left;
+    margin-right:13px;
+}
+.presenter-list ul li .cell {
+    width: 245px;
+    height: 400px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    float: left;
+}
+.presenter-list  .cell:hover .shade {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  text-decoration: none;
+}
+.presenter-list ul li .pic {
+    width: 245px;
+    height: 400px;
+}
+
+.presenter-list .cell .intro {
+    display: none;
+}
+.presenter-list .cell:hover .intro{
+	display:block;
+	z-index: 10;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background: transparent;
+}
+.presenter-list .cell .intro .job{
+	font-size: 20px;
+	color: #fff;
+	width: 22px;
+	position: absolute;
+	top: 140px;
+	left: 90px;
+}
+.presenter-list .cell .intro .name{
+	font-size: 16px;
+	color: #fff;
+	width: 22px;
+	position: absolute;
+	top: 140px;
+	left: 120px; 
+	text-align:center;
+	border-left:1px solid #FFF;
+}
+.presenter-list .cell .shade {
+  border: 1px solid #ddd;
+  -webkit-border:0px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  *zoom:1;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+.presenter-list .cell .title{
+  	display: block;
+	margin-top:20px;
+	font-size:16px;
+}
+
+.presenter-list .left-arrow{
+	width:49px;
+	height:78px;
+	position:absolute;
+	left:0;
+	top:160px;
+	background: url('../imgs/left-arr.png') no-repeat center ;
+	z-index: 199;
+}
+.presenter-list .right-arrow{
+	width:49px;
+	height:78px;
+	position:absolute;
+	right:0;
+	top:160px;
+	background: url('../imgs/right-arr.png') no-repeat center ;
+	z-index: 199;
+}

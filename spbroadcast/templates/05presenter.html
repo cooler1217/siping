@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<meta name="renderer" content="”webkit|ie-comp|ie-stand”">
+<link rel="stylesheet" type="text/css" href="style/css/common.css">
+<script type="text/javascript" src="style/js/jquery.js"></script>
+<script type="text/javascript" src="style/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="style/css/presenter.css">
+<script type="text/javascript" src="style/js/presenter.js"></script>
+</head>
+<body>
+	<div class="header">
+	 	<div class="header-con">
+	 			<div class="logo">
+	 				<a class="main-logo" href="#"></a>
+	 			</div>	 
+	 			<div class="weather">
+	 				<dt>
+	 					<span>&nbsp;&nbsp;北京&nbsp;</span>
+	 					<a style="">【切换】</a>
+	 				</dt>
+	 				<dd>
+	 					<span>空气质量 ：优</span>
+	 					<span>多云转晴 ：26~35</span>
+	 				</dd>
+	 			</div>
+	 			<div class="search">
+	 				<div class="sec-log-reg">登录/注册</div>
+	 				<form >
+	 				<div class="align-right">
+	 					<input id="srch1" name="passwordtwo" type="text" 
+	 							class="search-input" value="请输入你要搜索的关键字" 
+	 							onfocus="if(this.value=='请输入你要搜索的关键字') this.value=''; this.style.color='#333'; return true;" 
+	 							onblur="if(this.value=='') this.value='请输入你要搜索的关键字'; this.style.color='#cccccc'; return true;"
+	 							style="color: #cccccc;">
+		 				<span class="search-bg" >
+		 					<input type="submit" value="搜索" class="btn">
+		 				</span>
+	 				</div>
+	 				</form>
+	 			</div>
+	     </div>
+	     <div class="wrapper-nav">
+	        	<ul class="nav title-font" >
+					<li><a id="home" href="http://127.0.0.1:8080/ServerCode/home#">网站首页</a></li> 
+					<li><a id="" href="http://127.0.0.1:8080/ServerCode/home#">四平新闻</a></li>
+					<li><a id="" href="http://127.0.0.1:8080/ServerCode/home#">在你身边</a></li>
+					<li><a id="" href="http://127.0.0.1:8080/ServerCode/home#">县区新闻</a></li> 
+					<li><a id="" href="http://127.0.0.1:8080/ServerCode/home#">专栏宣传</a></li>
+					<li><a id="" href="http://127.0.0.1:8080/ServerCode/home#">精品栏目</a></li>
+					<li><a id="" href="http://127.0.0.1:8080/ServerCode/home#">活动投票</a></li>
+					<li><a id="" href="http://127.0.0.1:8080/ServerCode/home#">视频展播</a></li>
+					<li><a id="" href="http://127.0.0.1:8080/ServerCode/home#">本地生活</a></li>
+		    	</ul>
+	     </div>
+	</div>
+	<div class="main">
+		<div class="place">
+			<a href="#">主持人</a> &gt; 新闻联播-李丽滢 
+		</div>
+		<div class="person-info">
+			<img class="pic" src="style/imgs/person-info.png" />
+			<div class="text">
+				<p>姓名：李美眼</p>
+				<p>星座：白羊座</p>
+				<p>血型：o型</p>
+				<p>爱好：音乐读书电影</p>
+				<p>最喜欢的颜色：红色</p>
+				<p>最喜欢的城市：北京</p>
+				<p>最高兴的事情：睡觉</p>
+				<p>最大的愿望：走遍世界</p>
+				<p>最喜欢的男演员：刘德华</p>
+				<p>最欣赏的品质：诚实</p>
+				<p>所主持的栏目：《城市速递》</p>
+				<p>致网友的一段话：做人、做事但求无心亏</p>
+			</div>
+		</div>
+		<div class="bshare">
+			<div class="bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1463281800405">
+				<a href="" class="bds_more" data-cmd="more"></a>
+				<a href="" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+				<a href="" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+				<a href="" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+				<a href="http://www.jlspgd.com/file/20160111/dyxfvblQzTLnb/1/mp4/1_1.mp4" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+				<a href="http://www.jlspgd.com/file/20160111/dyxfvblQzTLnb/1/mp4/1_1.mp4" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+			</div>
+            <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+		</div>
+		        
+		<div id="presenter-list" class="presenter-list">
+			<a href="javascript:;" id="goLeft" class="left-arrow"></a>
+			<a href="javascript:;"  id="goRight" class="right-arrow"></a>
+			<ul>
+				<li>
+					<a class="cell">
+						<div class="shade"></div> 
+						<img class="pic" src="style/imgs/presenter.png">
+						<div class="intro">
+							<div class="job">新闻联播</div>
+							<div class="name">李美妍</div>
+						</div> 
+					</a>
+				</li>
+				<li>
+					<a class="cell people">
+						<div class="shade"></div> 
+						<img class="pic" src="style/imgs/presenter.png">
+						<div class="intro">
+							<div class="job">新闻联播</div>
+							<div class="name">李美妍</div>
+						</div> 
+					</a>
+				</li>
+				<li>
+					<a class="cell people">
+						<div class="shade"></div> 
+						<img class="pic" src="style/imgs/presenter.png">
+						<div class="intro">
+							<div class="job">新闻联播</div>
+							<div class="name">李美妍</div>
+						</div> 
+					</a>
+				</li>
+				<li>
+					<a class="cell people">
+						<div class="shade"></div> 
+						<img class="pic" src="style/imgs/presenter.png">
+						<div class="intro">
+							<div class="job">新闻联播</div>
+							<div class="name">李美妍</div>
+						</div> 
+					</a>
+				</li>
+				<li>
+					<a class="cell people">
+						<div class="shade"></div> 
+						<img class="pic" src="style/imgs/presenter-2.png">
+						<div class="intro">
+							<div class="job">新闻联播</div>
+							<div class="name">李美妍</div>
+						</div> 
+					</a>
+				</li>
+				<li>
+					<a class="cell people">
+						<div class="shade"></div> 
+						<img class="pic" src="style/imgs/presenter-2.png">
+						<div class="intro">
+							<div class="job">新闻联播</div>
+							<div class="name">李美妍</div>
+						</div> 
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="footer">
+		 	<div class="footer-con">
+		 		<p>
+		 			</p><ul class="links">
+						<li>关于我们</li> <li>版权申明</li>
+						 <li>招贤纳士</li> <li>联系我们</li> 
+						 <li>广告合作</li> <li>网站地图</li>
+					</ul>
+		 		<p></p>
+		 		<p>版权所有：四平市广播电视台</p>
+		 		<p>ICP:吉ICP备15002920号-1 互联网视听节目服务（AVSP）：吉备2013001号</p>
+		 		<p>联系地址：四平市铁西区南迎宾大街广电大厦</p>
+		 	</div>
+	</div>                
+</body>
+</html>
